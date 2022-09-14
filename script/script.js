@@ -8,27 +8,23 @@ let a = document.getElementById("adultos");
 let c = document.getElementById("criancas");
 let t = document.getElementById("tempo");
 
-let aValor = a.value;
-let cValor = c.value;
-let tValor = t.value;
-
 let resultado = document.getElementById("resultado");
 
 
 function carne(adultos, crianças, tempo) {
 
+    // let tPessoas = parseFloat(adultos) + parseFloat(crianças / 2);
 
-    let tPessoas = parseInt(adultos) + (parseFloat(crianças) / 2);
-    console.log(parseInt(adultos))
+    // console.log(adultos, crianças, tPessoas)
 
     if (tempo < 6) {
 
-        let tCarne = tPessoas * 400 / 1000;
+        let tCarne = (adultos * 400 + crianças * 200) / 1000;
         return tCarne;
 
     } else {
 
-        let tCarne = tPessoas * 650 / 1000;
+        let tCarne = (adultos * 650 + crianças * 325) / 1000;
         return tCarne;
     }
 
@@ -38,31 +34,28 @@ function cerveja(adultos, tempo) {
 
     if (tempo < 6) {
 
-        let tCerveja = Math.ceil(adultos * 1200);
+        let tCerveja = Math.ceil(adultos * 1200 / 350);
         return tCerveja;
 
     } else {
 
-        let tCerveja = Math.ceil(adultos * 2000);
-        return tCerveja + (2000 * adultos);
+        let tCerveja = Math.ceil(adultos * 2000 / 350);
+        return tCerveja;
     }
 }
 
 function Refrigerante(crianças, tempo) {
 
-    // 500 = 1000ml / 2 (crianças)
-
-
-
     if (tempo < 6) {
 
-        let tRefrigerante = Math.ceil(crianças * 500);
+        // 500 = 1000ml / 2 (crianças)
+        let tRefrigerante = Math.ceil(crianças * 500 / 350);
         return tRefrigerante;
 
     } else {
 
         // 750 = 1500ml/2 (crianças)
-        let tRefrigerante = Math.ceil(crianças * 750);
+        let tRefrigerante = Math.ceil(crianças * 750 / 350);
         return tRefrigerante;
     }
 
@@ -70,14 +63,10 @@ function Refrigerante(crianças, tempo) {
 
 function calcular() {
 
-    let aValor = a.value;
-    let cValor = c.value;
-    let tValor = t.value;
-
     resultado.innerHTML = "<p class='negrito'>Você precisa de:</p>" +
-        "<p>" + "<a class='numeros'>" + carne(aValor, cValor, tValor) +
+        "<p>" + "<a class='numeros'>" + carne(a.value, c.value, t.value) +
         "kg </a>" + "de carne</p>" +
-        "<p>" + "<a class='numeros'>" + cerveja(aValor, tValor) + " </a>" + "latas de cerveja</p>" +
-        "<p>" + "<a class='numeros'>" + Refrigerante(cValor, tValor) + " </a>" + "latas de refrigerante</p>";
+        "<p>" + "<a class='numeros'>" + cerveja(a.value, t.value) + " </a>" + "latas de cerveja</p>" +
+        "<p>" + "<a class='numeros'>" + Refrigerante(c.value, t.value) + " </a>" + "latas de refrigerante</p>"
 }
 
