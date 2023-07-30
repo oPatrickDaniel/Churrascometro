@@ -1,44 +1,52 @@
+/* Formatação do css */
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-  background-color: rgb(221, 238, 255);
-  padding: 10px 20px 20px 20px;
+body {
+  font-family: system-ui, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxItens {
+  background-color: #7f9dbb;
   max-width: 300px;
-  margin: 20px auto 0 auto;
-  border-radius: 10px;
-  /* font-family: Arial, Helvetica, sans-serif; */
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: .6em;
 }
 
 h1 {
   text-align: center;
 }
 
+.inputsContainer {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
 input,
 select {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 5px;
-  margin-top: 5px;
+  padding: .5em;
 }
 
-button {
-  margin-top: 5px;
+.resultArea {
+  margin-top: 1em;
+  font-size: 18px;
+  line-height: 30px;
 }
 
-.negrito {
-  margin-top: 15px;
-  font-weight: bold;
-  font-size: x-large;
-  margin-bottom: 5px;
+h2 {
+  margin-bottom: .5em;
 }
-#resultado {
-  text-align: left;
-  margin-left: 5px;
-  font-size: large;
-}
-.numeros {
-  color: red;
+
+.colorRed {
+  color: #d32020;
 }
