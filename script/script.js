@@ -47,12 +47,19 @@ function returnResults() {
         let adultsValue = parseInt(adultsInput.value);
         let childrenValue = parseInt(childrenInput.value);
         let timeValue = parseFloat(timeInput.value);
-        resultArea.innerHTML = `
-        <h2>Você precisa de:</h2>
-        <p><span class='colorRed'> ${calcAmountMeat(adultsValue, childrenValue, timeValue)} kg </span>de carne</p>
-        <p><span class='colorRed'>${calcAmountBeer(adultsValue, timeValue)}</span> latas de cerveja</p>
-        <p><span class='colorRed'>${calcAmountSoda(childrenValue, timeValue)}</span> latas de refrigerante</p>
-        `;
+        if (isNaN(adultsValue) || isNaN(childrenValue) || isNaN(timeValue)) {
+            resultArea.innerHTML = `
+            <p class="colorRed">Preencha todos os formulários acima</p>
+            `;
+        }
+        else {
+            resultArea.innerHTML = `
+                <h2>Você precisa de:</h2>
+                <p><span class='colorRed'> ${calcAmountMeat(adultsValue, childrenValue, timeValue)} kg </span>de carne</p>
+                <p><span class='colorRed'>${calcAmountBeer(adultsValue, timeValue)}</span> latas de cerveja</p>
+                 <p><span class='colorRed'>${calcAmountSoda(childrenValue, timeValue)}</span> latas de refrigerante</p>
+            `;
+        }
     }
     else {
         console.log('Não foi possível imprimir o resultado');
