@@ -1,72 +1,62 @@
-// Carne - 400g por pessoa    + de 6 horas - 650
-// cerveja    -    1200ml por pessoa   + de 6 horas    -   2000ml
-// Refrigerante   -   1000ml por pessoa   + de 6 horas    -   1500ml
-
+// Carne: 400g por pessoa até 6h. A partir de 6h 650g
+// cerveja: 1200ml por pessoa até 6h. A partir de 6h 2000ml
+// Refrigerante: 1000ml por pessoa até 6h. A partir de 6h 1500ml
 // crianças valem 0,5
 
-let a = document.getElementById("adultos");
-let c = document.getElementById("criancas");
-let t = document.getElementById("tempo");
+// inputs html
+const adultsInput: HTMLInputElement | null = document.querySelector("#adults")
+const childrenInput: HTMLInputElement | null = document.querySelector("#children")
+const timeInput: HTMLInputElement | null = document.querySelector("#time")
+const resultInput: HTMLElement | null = document.querySelector('#calcButton')
+const resultArea: HTMLElement | null = document.querySelector("#resultArea")
 
-let resultado = document.getElementById("resultado");
-
-
-function carne(adultos, crianças, tempo) {
-
-    // let tPessoas = parseFloat(adultos) + parseFloat(crianças / 2);
-
-    // console.log(adultos, crianças, tPessoas)
-
-    if (tempo < 6) {
-
-        let tCarne = (adultos * 400 + crianças * 200) / 1000;
-        return tCarne;
-
+function calcAmountMeat(adults: number, children: number, time: number) {
+    // calcula a quantidade de carne necessária
+    if (time < 6) {
+        return (adults * 0.4 + children * 0.2).toFixed(1)
     } else {
-
-        let tCarne = (adultos * 650 + crianças * 325) / 1000;
-        return tCarne;
-    }
-
-}
-
-function cerveja(adultos, tempo) {
-
-    if (tempo < 6) {
-
-        let tCerveja = Math.ceil(adultos * 1200 / 350);
-        return tCerveja;
-
-    } else {
-
-        let tCerveja = Math.ceil(adultos * 2000 / 350);
-        return tCerveja;
+        return (adults * 0.65 + children * 0.325).toFixed(1)
     }
 }
 
-function Refrigerante(crianças, tempo) {
-
-    if (tempo < 6) {
-
-        // 500 = 1000ml / 2 (crianças)
-        let tRefrigerante = Math.ceil(crianças * 500 / 350);
-        return tRefrigerante;
-
+function calcAmountBeer(adults: number, time: number) {
+    // calcula a quantidade de cerveja necessária (350 = lata 350ml)
+    if (time < 6) {
+        return Math.ceil(adults * 1200 / 350)
     } else {
-
-        // 750 = 1500ml/2 (crianças)
-        let tRefrigerante = Math.ceil(crianças * 750 / 350);
-        return tRefrigerante;
+        return Math.ceil(adults * 2000 / 350)
     }
-
 }
 
-function calcular() {
-
-    resultado.innerHTML = "<p class='negrito'>Você precisa de:</p>" +
-        "<p>" + "<a class='numeros'>" + carne(a.value, c.value, t.value) +
-        "kg </a>" + "de carne</p>" +
-        "<p>" + "<a class='numeros'>" + cerveja(a.value, t.value) + " </a>" + "latas de cerveja</p>" +
-        "<p>" + "<a class='numeros'>" + Refrigerante(c.value, t.value) + " </a>" + "latas de refrigerante</p>"
+function calcAmountSoda(crianças: number, tempo: number) {
+    // calcula a quantidade de refrigerante necessária (350 = lata 350ml)
+    if (tempo < 6) {
+        return Math.ceil(crianças * 500 / 350)
+    } else {
+        return Math.ceil(crianças * 750 / 350)
+    }
 }
 
+if (resultInput) {
+    resultInput.addEventListener('click', returnResults)
+} else {
+    console.log('Um input não foi encontrado')
+}
+
+function returnResults() {
+    if (adultsInput && childrenInput && timeInput && resultArea) {
+
+        let adultsValue: number = parseInt(adultsInput.value)
+        let childrenValue: number = parseInt(childrenInput.value)
+        let timeValue: number = parseFloat(timeInput.value)
+
+        resultArea.innerHTML = `
+        <h2>Você precisa de:</h2>
+        <p><span class='colorRed'> ${calcAmountMeat(adultsValue, childrenValue, timeValue)} kg </span>de carne</p>
+        <p><span class='colorRed'>${calcAmountBeer(adultsValue, timeValue)}</span> latas de cerveja</p>
+        <p><span class='colorRed'>${calcAmountSoda(childrenValue, timeValue)}</span> latas de refrigerante</p>
+        `;
+    } else {
+        console.log('Não foi possível imprimir o resultado');
+    }
+}
