@@ -12,10 +12,10 @@ const resultArea = document.querySelector("#resultArea");
 function calcAmountMeat(adults, children, time) {
     // calcula a quantidade de carne necessária
     if (time < 6) {
-        return (adults * 0.4 + children * 0.2).toFixed(1);
+        return (adults * 0.4 + children * 0.2);
     }
     else {
-        return (adults * 0.65 + children * 0.325).toFixed(1);
+        return (adults * 0.65 + children * 0.325);
     }
 }
 function calcAmountBeer(adults, time) {
@@ -40,7 +40,7 @@ if (resultInput) {
     resultInput.addEventListener('click', returnResults);
 }
 else {
-    console.log('Um input não foi encontrado');
+    console.log('Um input "resultado" não foi encontrado');
 }
 function returnResults() {
     if (adultsInput && childrenInput && timeInput && resultArea) {
@@ -55,7 +55,7 @@ function returnResults() {
         else {
             resultArea.innerHTML = `
                 <h2>Você precisa de:</h2>
-                <p><span class='colorRed'> ${calcAmountMeat(adultsValue, childrenValue, timeValue)} kg </span>de carne</p>
+                <p><span class='colorRed'> ${calcAmountMeat(adultsValue, childrenValue, timeValue).toFixed(1)} kg </span>de carne</p>
                 <p><span class='colorRed'>${calcAmountBeer(adultsValue, timeValue)}</span> latas de cerveja</p>
                  <p><span class='colorRed'>${calcAmountSoda(childrenValue, timeValue)}</span> latas de refrigerante</p>
             `;
